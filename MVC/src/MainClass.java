@@ -36,14 +36,16 @@ public class MainClass {
 		frame.setVisible(true);
 		
 		// Create 10 shapes
-		for(int i = 1; i <= 10; i ++) {
-			model.addShape(new HShape(300,300,Color.CYAN,360));
-//			if (Math.random() >= 0.5) {
-//				model.addShape(new HShape());
-//			} else {
-//				model.addShape(new FibonacciSquare());
-//			}
-		}
+		model.addShape(new HShape(100,100,Color.CYAN,180));
+		model.addShape(new HShape(300,300,Color.CYAN,360));
+//		for(int i = 1; i <= 10; i ++) {
+//			model.addShape(new HShape(300,300,Color.CYAN,360));
+////			if (Math.random() >= 0.5) {
+////				model.addShape(new HShape());
+////			} else {
+////				model.addShape(new FibonacciSquare());
+////			}
+//		}
 		
 		
 	}

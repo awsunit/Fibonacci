@@ -4,6 +4,7 @@ public abstract class AbstractShape implements Shape {
 	
 	private int x;
 	private int y;
+	//the sqr that the H resides in
 	private int containerSqrSize;
 	private Color c;
 	
