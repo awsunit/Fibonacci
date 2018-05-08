@@ -14,7 +14,7 @@ public class Viewer extends JPanel implements View {
 
 	@Override
 	public void update(DrawingModel model) {
-		System.out.println("Update called");
+		//System.out.println("Update called");
 		this.model = model;
 		repaint(); // will eventually call paintComponent
 	}

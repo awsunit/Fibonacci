@@ -1,22 +1,19 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class FibonacciSquare extends AbstractShape {
 
 	private int quadrant;
 	private int myPlaceInFibSeq;
+	private ArrayList<FibonacciSquare> innerSqr = new ArrayList<FibonacciSquare>();
 	
-	protected int getFibSeq() {
-		return myPlaceInFibSeq;
-	}
-	protected void setFibSeq(int i) {
-		myPlaceInFibSeq = i;
-	}
-
-	public FibonacciSquare(int x, int y, Color c, int size, int quadrant, int plcInFibSq) {
-		super(x, y, c, size);
+	
+	//removing int size, 
+	public FibonacciSquare(int x, int y, Color c, int quadrant, int plcInFibSq) {
+		super(x, y, c, FibonacciVal.FibonnaciNum(plcInFibSq));
 		this.setQuadrant(quadrant);
 		this.setFibSeq(plcInFibSq);
 		
@@ -37,19 +34,26 @@ public class FibonacciSquare extends AbstractShape {
 		switch(this.quadrant) {
 		
 		case 1:
-			quad1(x, y, width, height, 0, 90, g);
+			g.drawArc(x, y, width, height, 0, 90);
+			// draw actual square arc occupies
+			g.drawRect(x + width / 2, y, width / 2, height / 2);
 			break;
 		
 		case 2:
-			quad2(x, y, width, height, 90, 90, g);
+			g.drawArc(x, y, width, height, 90, 90);
+			// draw actual square arc occupies
+			g.drawRect(this.getX(), this.getY(), width / 2, height / 2);
 			break;
 			
 		case 3:
-			quad3(x, y, width, height, 180, 90, g);
+			g.drawArc(x, y, width, height, 180, 90);
+			// draw actual square arc occupies
+			g.drawRect(this.getX(), this.getY() + (width/2), width / 2, height / 2);
 			break;
 		
 		case 4:
-			quad4(x, y, width, height, 270, 90, g);
+			g.drawArc(x, y, width, height, 270, 90);
+			g.drawRect(this.getX() + (width/2), this.getY() + (width/2), width / 2, height / 2);
 			break;
 		}
 			
@@ -69,22 +73,25 @@ public class FibonacciSquare extends AbstractShape {
 		int myFibSeqVal = FibonacciVal.FibonnaciNum(baseFibSeq + 2);
 		
 		
-		
+		System.out.println("recieved pos in seg " + baseFibSeq);
+		System.out.println("passed pos in seg " + (baseFibSeq + 1));
+		System.out.println("recieved val of seg " + baseFibSeqVal);
+		System.out.println("passes val of seg " + myFibSeqVal);
 		switch(baseQuadrant) {
-		
+		//removing all the size terms from each case, was fourth in position
 		case 1:
 			System.out.println("baseq " + baseQuadrant);
 			//quad1
-			int deltaX = (myFibSeqVal/2) - (baseFibSeqVal/2);
-			int nuX = x - deltaX;
-			sqr = new FibonacciSquare(nuX,y,Color.BLACK,myFibSeqVal,baseQuadrant+1,baseFibSeq + 1);
+			//(baseFibSeqVal/2)-((myFibSeqVal/2)-(baseFibSeqVal/2))
+			int nuX = x - (baseFibSeqVal/2)-((myFibSeqVal/2)-(baseFibSeqVal/2)) ;
+			sqr = new FibonacciSquare(nuX,y,Color.BLACK,baseQuadrant+1,baseFibSeq + 1);
 			return sqr;
 		case 2:
 			System.out.println("baseq " + baseQuadrant);
 			//quad2
 			int deltaY = (myFibSeqVal/2) - (baseFibSeqVal/2);
 			int nuY = y - deltaY;
-			sqr = new FibonacciSquare(x,nuY,Color.BLACK,myFibSeqVal,baseQuadrant+1,baseFibSeq + 1);
+			sqr = new FibonacciSquare(x,nuY,Color.BLACK,baseQuadrant+1,baseFibSeq + 1);
 			return sqr;
 			
 		case 3:
@@ -93,7 +100,7 @@ public class FibonacciSquare extends AbstractShape {
 			int deltax = (myFibSeqVal/2) - (baseFibSeqVal/2);
 			int nuy = y - (myFibSeqVal/2 + ((myFibSeqVal/2) - (baseFibSeqVal)) ) ;
 			int nux = x - deltax;
-			sqr = new FibonacciSquare(nux,nuy,Color.BLACK,myFibSeqVal,baseQuadrant+1,baseFibSeq + 1);
+			sqr = new FibonacciSquare(nux,nuy,Color.BLACK,baseQuadrant+1,baseFibSeq + 1);
 			return sqr;
 			
 		case 4:	
@@ -102,7 +109,7 @@ public class FibonacciSquare extends AbstractShape {
 			int deltx = (myFibSeqVal/2) - (baseFibSeqVal/2);
 			int nuyy = y - ((myFibSeqVal/2) - (baseFibSeqVal/2) ) ;
 			int nuxx = x - myFibSeqVal + baseFibSeqVal;
-			sqr = new FibonacciSquare(nuxx,nuyy,Color.BLACK,myFibSeqVal,baseQuadrant-3,baseFibSeq + 1);
+			sqr = new FibonacciSquare(nuxx,nuyy,Color.BLACK,baseQuadrant-3,baseFibSeq + 1);
 			System.out.println("was here");
 			return sqr;
 
@@ -111,7 +118,7 @@ public class FibonacciSquare extends AbstractShape {
 			
 		}
 	//to make compiler happy
-	 sqr = new FibonacciSquare(11,11,Color.BLACK,myFibSeqVal,baseQuadrant+1,baseFibSeq + 1);
+	 sqr = new FibonacciSquare(11,11,Color.BLACK,baseQuadrant+1,baseFibSeq + 1);
 	return sqr;
 		
 		
@@ -123,31 +130,12 @@ public class FibonacciSquare extends AbstractShape {
 	protected int getQuadrant() {
 		return this.quadrant;
 	}
-
-	protected void quad1(int arcStartX, int arcStartY, int width, int height, int thetaNaught, int thetaFinal,
-			Graphics g) {
-		g.drawArc(arcStartX, arcStartY, width, height, thetaNaught, thetaFinal);
-		// draw actual square arc occupies
-		g.drawRect(arcStartX + width / 2, arcStartY, width / 2, height / 2);
+	protected int getFibSeq() {
+		return myPlaceInFibSeq;
+	}
+	protected void setFibSeq(int i) {
+		myPlaceInFibSeq = i;
 	}
 
-	protected void quad2(int arcStartX, int arcStartY, int width, int height, int thetaNaught, int thetaFinal,
-			Graphics g) {
-		g.drawArc(arcStartX, arcStartY, width, height, thetaNaught, thetaFinal);
-		// draw actual square arc occupies
-		g.drawRect(this.getX(), this.getY(), width / 2, height / 2);
-	}
-
-	protected void quad3(int arcStartX, int arcStartY, int width, int height, int thetaNaught, int thetaFinal,
-			Graphics g) {
-		g.drawArc(arcStartX, arcStartY, width, height, thetaNaught, thetaFinal);
-		// draw actual square arc occupies
-		g.drawRect(this.getX(), this.getY() + (width/2), width / 2, height / 2);
-	}
-
-	protected void quad4(int arcStartX, int arcStartY, int width, int height, int thetaNaught, int thetaFinal,
-			Graphics g) {
-		g.drawArc(arcStartX, arcStartY, width, height, thetaNaught, thetaFinal);
-		g.drawRect(this.getX() + (width/2), this.getY() + (width/2), width / 2, height / 2);
-	}
+	
 }

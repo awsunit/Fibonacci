@@ -36,33 +36,28 @@ public class MainClass {
 		frame.setVisible(true);
 
 		// Adding HShapes
-		// model.addShape(new HShape(100,100,Color.CYAN,180));
+		 model.addShape(new HShape(100,100,Color.CYAN,180));
 		// model.addShape(new HShape(300,300,Color.CYAN,360));
-		// model.addShape(new FibonacciSquare(300, 300, Color.BLACK, jack, 1));
-		// model.addShape(new FibonacciSquare(300, 300, Color.CYAN, jill, 2));
-		// model.addShape(new FibonacciSquare(300, 300, Color.RED, bill, 3));
+	
 		// this HShape has nested HShapes
-		
-		
-		
-		
-		HShape frog = new HShape(200, 500, Color.CYAN, 270);
+		HShape frog = new HShape(200, 100, Color.YELLOW, 270);
 		model.addShape(frog);
-		for (int i = 0; i < 7; i++) {
+		/*for (int i = 0; i < 7; i++) {
 			frog.addInnerH(frog.getX(), frog.getY(), frog.getColor(), frog.getSize());
 
 		}
 		for (int i = 0; i < 7; i++) {
 			model.addShape(frog.getInnerH(i));
-		}
+		}*/
 
-		model.addShape(new FibonacciSquare(400, 100, Color.GREEN, 180, 1, 1));
-		model.addShape(new FibonacciSquare(600, 200, Color.BLACK, 240, 2, 1));
-		model.addShape(new FibonacciSquare(800, 400, Color.RED, 180, 3, 1));
-		model.addShape(new FibonacciSquare(500, 500, Color.PINK, 360, 4, 1));
+		//adding fibsqrs
+		model.addShape(new FibonacciSquare(500, 100, Color.GREEN, 1, 10));
+		model.addShape(new FibonacciSquare(600, 200, Color.BLUE,2, 16));
+		model.addShape(new FibonacciSquare(130, 300, Color.RED,  3, 15));
+		model.addShape(new FibonacciSquare(500, 500, Color.PINK, 4, 11));
 
-		int nill = FibonacciVal.FibonnaciNum(10);
-		FibonacciSquare sqr = new FibonacciSquare(200, 200, Color.BLACK, nill, 1, 10);
+	
+		/*FibonacciSquare sqr = new FibonacciSquare(200, 200, Color.BLACK, 1, 15);
 		model.addShape(sqr);
 		FibonacciSquare sqr1 = FibonacciSquare.addLevel(sqr);
 		model.addShape(sqr1);
@@ -71,7 +66,7 @@ public class MainClass {
 		FibonacciSquare sqr3 = FibonacciSquare.addLevel(sqr2);
 		model.addShape(sqr3);
 		FibonacciSquare sqr4 = FibonacciSquare.addLevel(sqr3);
-		model.addShape(sqr4);
+		model.addShape(sqr4);*/
 
 		// for(int i = 1; i <= 10; i ++) {
 		// model.addShape(new HShape(300,300,Color.CYAN,360));

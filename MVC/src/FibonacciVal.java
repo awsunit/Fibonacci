@@ -4,8 +4,8 @@ public class FibonacciVal {
 	public static void main (String[] args) {
 		
 		
-		System.out.println(FibonnaciNum(15));
-		
+		System.out.println(FibonnaciNum(10));
+		System.out.println(FibonnaciNum(12));
 		System.out.println("all doneski");
 	}
 	
