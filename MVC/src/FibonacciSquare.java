@@ -6,6 +6,7 @@ import java.util.Random;
 
 public class FibonacciSquare extends AbstractShape {
 
+
 	private int quadrant;
 	private int myPlaceInFibSeq;
 	private ArrayList<FibonacciSquare> innerSqr = new ArrayList<FibonacciSquare>();
@@ -18,6 +19,7 @@ public class FibonacciSquare extends AbstractShape {
 		this.setFibSeq(plcInFibSq);
 		
 	}
+
 
 	@Override
 	public void draw(Graphics g) {
