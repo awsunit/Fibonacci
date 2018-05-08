@@ -6,10 +6,19 @@ import java.util.Random;
 public class FibonacciSquare extends AbstractShape {
 
 	private int quadrant;
+	private int myPlaceInFibSeq;
+	
+	protected int getFibSeq() {
+		return myPlaceInFibSeq;
+	}
+	protected void setFibSeq(int i) {
+		myPlaceInFibSeq = i;
+	}
 
-	public FibonacciSquare(int x, int y, Color c, int size, int quadrant) {
+	public FibonacciSquare(int x, int y, Color c, int size, int quadrant, int plcInFibSq) {
 		super(x, y, c, size);
 		this.setQuadrant(quadrant);
+		this.setFibSeq(plcInFibSq);
 		
 	}
 
@@ -48,6 +57,65 @@ public class FibonacciSquare extends AbstractShape {
 
 	}
 
+	protected static FibonacciSquare addLevel(FibonacciSquare baseSqr) {
+		int x = baseSqr.getX();
+		int y =  baseSqr.getY();
+		int baseQuadrant = baseSqr.getQuadrant();
+		
+		int baseFibSeq = baseSqr.getFibSeq();
+		int baseFibSeqVal = baseSqr.getSize();
+		
+		FibonacciSquare sqr;
+		int myFibSeqVal = FibonacciVal.FibonnaciNum(baseFibSeq + 2);
+		
+		
+		
+		switch(baseQuadrant) {
+		
+		case 1:
+			System.out.println("baseq " + baseQuadrant);
+			//quad1
+			int deltaX = (myFibSeqVal/2) - (baseFibSeqVal/2);
+			int nuX = x - deltaX;
+			sqr = new FibonacciSquare(nuX,y,Color.BLACK,myFibSeqVal,baseQuadrant+1,baseFibSeq + 1);
+			return sqr;
+		case 2:
+			System.out.println("baseq " + baseQuadrant);
+			//quad2
+			int deltaY = (myFibSeqVal/2) - (baseFibSeqVal/2);
+			int nuY = y - deltaY;
+			sqr = new FibonacciSquare(x,nuY,Color.BLACK,myFibSeqVal,baseQuadrant+1,baseFibSeq + 1);
+			return sqr;
+			
+		case 3:
+			System.out.println("baseq " + baseQuadrant);
+//			//quad3
+			int deltax = (myFibSeqVal/2) - (baseFibSeqVal/2);
+			int nuy = y - (myFibSeqVal/2 + ((myFibSeqVal/2) - (baseFibSeqVal)) ) ;
+			int nux = x - deltax;
+			sqr = new FibonacciSquare(nux,nuy,Color.BLACK,myFibSeqVal,baseQuadrant+1,baseFibSeq + 1);
+			return sqr;
+			
+		case 4:	
+//			//quad4
+		
+			int deltx = (myFibSeqVal/2) - (baseFibSeqVal/2);
+			int nuyy = y - ((myFibSeqVal/2) - (baseFibSeqVal/2) ) ;
+			int nuxx = x - myFibSeqVal + baseFibSeqVal;
+			sqr = new FibonacciSquare(nuxx,nuyy,Color.BLACK,myFibSeqVal,baseQuadrant-3,baseFibSeq + 1);
+			System.out.println("was here");
+			return sqr;
+
+			
+			
+			
+		}
+	//to make compiler happy
+	 sqr = new FibonacciSquare(11,11,Color.BLACK,myFibSeqVal,baseQuadrant+1,baseFibSeq + 1);
+	return sqr;
+		
+		
+	}
 	protected void setQuadrant(int q) {
 		this.quadrant = q;
 	}
