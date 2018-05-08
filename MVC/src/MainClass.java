@@ -17,6 +17,9 @@ public class MainClass {
 		// Shorter version of the same code
 		// using lambda notation
 		SwingUtilities.invokeLater(() -> createGUI());
+		
+		FibonacciVal val = new FibonacciVal();
+		System.out.println(val.FibonnaciNum(6));
 	}
 
 	public static void createGUI() {

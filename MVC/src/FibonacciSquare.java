@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.util.Random;
 
 public class FibonacciSquare extends AbstractShape {
+	
+	
 	@Override
 	public void draw(Graphics g) {
 		// print Fibonacci at a random location
