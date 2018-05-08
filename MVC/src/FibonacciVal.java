@@ -3,8 +3,8 @@ public class FibonacciVal {
 	
 	public static void main (String[] args) {
 		
-		System.out.println("should be 3");
-		System.out.println(FibonnaciNum(8));
+		
+		System.out.println(FibonnaciNum(15));
 		
 		System.out.println("all doneski");
 	}

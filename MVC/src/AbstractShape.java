@@ -8,6 +8,13 @@ public abstract class AbstractShape implements Shape {
 	private int containerSqrSize;
 	private Color c;
 	
+	public AbstractShape(int x, int y, Color c, int containerSqrSize) {
+		this.setX(x);
+		this.setY(y);
+		this.setColor(c);
+		this.setSize(containerSqrSize);
+	}
+	
 	
 	protected int getX() {
 		return x;
