@@ -1,50 +1,51 @@
 import java.awt.Color;
 
 public abstract class AbstractShape implements Shape {
-	
-	private int x;
-	private int y;
-	//the sqr that the H resides in
-	private int containerSqrSize;
-	private Color c;
-	
-	public AbstractShape(int x, int y, Color c, int containerSqrSize) {
-		this.setX(x);
-		this.setY(y);
-		this.setColor(c);
-		this.setSize(containerSqrSize);
-	}
-	
-	
-	protected int getX() {
-		return x;
-	}
-	
-	protected int getY() {
-		return y;
-	}
-	
-	protected Color getColor() {
-		return c;
-	}
-	
-	protected int getSize() {
-		return containerSqrSize;
-	}
-	
-	protected void setSize(int size) {
-		this.containerSqrSize = size;
-	}
-	protected void setColor(Color c) {
-		this.c = c;
-	}
-	
-	protected void setX(int x) {
-		this.x = x;
-	}
-	
-	protected void setY(int y) {
-		this.y= y;
-	}
+
+  protected int xLocation;
+  protected int yLocation;
+  //the sqr that the H resides in
+  protected int size;
+  protected Color color;
+
+  public AbstractShape(int xLocation, int yLocation, Color color, int size) {
+    this.setxLocation(xLocation);
+    this.setyLocation(yLocation);
+    this.setColor(color);
+    this.setSize(size);
+  }
+
+
+  protected int getxLocation() {
+    return xLocation;
+  }
+
+  protected void setxLocation(int xLocation) {
+    this.xLocation = xLocation;
+  }
+
+  protected int getyLocation() {
+    return yLocation;
+  }
+
+  protected void setyLocation(int yLocation) {
+    this.yLocation = yLocation;
+  }
+
+  protected Color getColor() {
+    return color;
+  }
+
+  protected void setColor(Color c) {
+    this.color = c;
+  }
+
+  protected int getSize() {
+    return size;
+  }
+
+  protected void setSize(int size) {
+    this.size = size;
+  }
 
 }

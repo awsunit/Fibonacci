@@ -1,4 +1,4 @@
-
 public interface View {
-	void update(DrawingModel model);
+
+  void update(DrawingModel model);
 }

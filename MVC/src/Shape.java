@@ -1,5 +1,7 @@
 import java.awt.Graphics;
 
 public interface Shape {
-	void draw(Graphics g);
+
+  void draw(Graphics g);
+  Shape copy();
 }
