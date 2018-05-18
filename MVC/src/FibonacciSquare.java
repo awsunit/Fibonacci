@@ -14,6 +14,7 @@ public class FibonacciSquare extends AbstractShape {
 		super(x, y, c, FibonacciVal.FibonnaciNum(plcInFibSq));
 		this.setQuadrant(quadrant % 4);
 		this.setFibSeq(plcInFibSq);
+		this.shapeArray = new FibonacciSquare[1];
 
 	}
 
@@ -32,6 +33,7 @@ public class FibonacciSquare extends AbstractShape {
 
 	}
 
+	
 	protected FibonacciSquare addLevel() {
 		int x = this.getX();
 		int y = this.getY();

@@ -1,6 +1,10 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.SwingUtilities;
 
 public class MainClass {
@@ -37,32 +41,92 @@ public class MainClass {
 
 		// Show it (execute this line last)
 		frame.setVisible(true);
+		
+		//Buttons
+		JRadioButton add = new JRadioButton("Add");
+		JRadioButton remove = new JRadioButton("Remove");
+		JRadioButton reset = new JRadioButton("Reset");
+		
+		//Panel for the buttons
+		JPanel buttPan = new JPanel();
+		buttPan.add(add);
+		buttPan.add(remove);
+		buttPan.add(reset);
+		
+		//Connect panel to frame
+		frame.add(buttPan, BorderLayout.NORTH);
+		
+		//ButtonGroup
+		ButtonGroup buttGroup = new ButtonGroup();
+		buttGroup.add(add);
+		buttGroup.add(remove);
+		add.setSelected(true);
+		
+		
+		//Controller setup
+		Controller controller = new Controller(model);
+		
+		//Connect buttons with controller
+		add.addActionListener(controller);
+		remove.addActionListener(controller);
+		reset.addActionListener(controller);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
 		// Adding HShapes
 		model.addShape(new HShape(800, 100, Color.CYAN, 180));
-//		 model.addShape(new HShape(300,300,Color.CYAN,360));
-
-		// this HShape has nested HShapes
-		HShape frog = new HShape(200, 100, Color.YELLOW, 270);
-		model.addShape(frog);
-		/*
-		 * for (int i = 0; i < 7; i++) { frog.addInnerH(frog.getX(), frog.getY(),
-		 * frog.getColor(), frog.getSize());
-		 * 
-		 * } for (int i = 0; i < 7; i++) { model.addShape(frog.getInnerH(i)); }
-		 */
-
-		// adding fibsqrs
-		model.addShape(new FibonacciSquare(500, 100, Color.GREEN, 1, 10));
-		model.addShape(new FibonacciSquare(600, 200, Color.BLUE, 2, 12));
-		model.addShape(new FibonacciSquare(130, 300, Color.RED, 3, 15));
-		model.addShape(new FibonacciSquare(500, 500, Color.PINK, 4, 11));
-
-		/*FibonacciSquare currentSquare = new FibonacciSquare(1240 / 2, 1024 / 2, Color.BLACK, 0, 0);
-		for (int i = 0; i < 17; i++) {
-			currentSquare = currentSquare.addLevel();
-			model.addShape(currentSquare);
-		}*/
+		 model.addShape(new HShape(300,300,Color.CYAN,360));
+//
+		 model.shapes.get(0).addLevel();
+		
+		 
+		 
+		 
+		 
+//		// this HShape has nested HShapes
+//		HShape frog = new HShape(200, 100, Color.YELLOW, 270);
+//		model.addShape(frog);
+//		/*
+//		 * for (int i = 0; i < 7; i++) { frog.addInnerH(frog.getX(), frog.getY(),
+//		 * frog.getColor(), frog.getSize());
+//		 * 
+//		 * } for (int i = 0; i < 7; i++) { model.addShape(frog.getInnerH(i)); }
+//		 */
+//
+//		// adding fibsqrs
+//		model.addShape(new FibonacciSquare(500, 100, Color.GREEN, 1, 10));
+//		model.addShape(new FibonacciSquare(600, 200, Color.BLUE, 2, 12));
+//		model.addShape(new FibonacciSquare(130, 300, Color.RED, 3, 15));
+//		model.addShape(new FibonacciSquare(500, 500, Color.PINK, 4, 11));
+//
+//		/*FibonacciSquare currentSquare = new FibonacciSquare(1240 / 2, 1024 / 2, Color.BLACK, 0, 0);
+//		for (int i = 0; i < 17; i++) {
+//			currentSquare = currentSquare.addLevel();
+//			model.addShape(currentSquare);
+//		}*/
 
 	}
 }

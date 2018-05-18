@@ -2,13 +2,13 @@ import java.util.ArrayList;
 
 public class DrawingModel {
 	// the list of the shapes
-	private ArrayList<Shape> shapes = new ArrayList<Shape>();
+	protected ArrayList<Shape> shapes = new ArrayList<Shape>();
 
 	// the list of the views connected to this model
 	private ArrayList<View> views = new ArrayList<View>();
 
 	// A client should be able to add a Shape to the model
-	public void addShape(Shape s) {
+	public void addShape(AbstractShape s) {
 		shapes.add(s);
 		updateAll();
 	}
@@ -36,7 +36,19 @@ public class DrawingModel {
 	public ArrayList<Shape> getShapes() {
 		// Change this later so that a deep copy is returned (or a copy that 
 		// behaves like a deep copy)
-		return shapes;
+		 ArrayList<Shape> listOfShapes = new ArrayList<>();
+		    for (Shape shape :shapes) {
+		      listOfShapes.add(shape.copy());
+		    }
+		    return listOfShapes;
+	}
+	
+	
+	public void addLevel() {
+		for(Shape shape: shapes) {
+			((AbstractShape) shape).addLevel();
+			updateAll();
+		}
 	}
 	
 	

@@ -27,6 +27,7 @@ public class Viewer extends JPanel implements View {
 		if (model != null) {
 			for (Shape s : model.getShapes()) {
 				s.draw(g);
+				
 			}
 		}
 	}

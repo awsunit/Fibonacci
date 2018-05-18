@@ -6,10 +6,11 @@ import java.util.Random;
 
 public class HShape extends AbstractShape {
 
-	private ArrayList<HShape> innerH = new ArrayList<HShape>(7);
+//	private HShape[] innerH = new ArrayList<HShape>(7);
 
 	public HShape(int x, int y, Color c, int size) {
 		super(x, y, c, size);
+		this.shapeArray = new HShape[7];
 
 	}
 
@@ -32,45 +33,68 @@ public class HShape extends AbstractShape {
 
 		// trace outline of the smallsqrs
 		traceSmallSqr(x, y, miniSqrWidth, width, height, g);
-	}
-
-	// creates 7 inner h's occupying sqrs that comprise this H
-	// adds to innerH ->> arraylist
-	// color can easily be modified
-	protected void addInnerH(int x, int y, Color c, int size) {
-		int nuSize = size / 3;
-
-		// topleft
-		innerH.add(new HShape(x, y, Color.YELLOW, nuSize));
-		// topright
-		innerH.add(new HShape(x + (2 * nuSize), y, Color.YELLOW, nuSize));
-		// midleft
-		innerH.add(new HShape(x, y + nuSize, Color.YELLOW, nuSize));
-		// midmid
-		innerH.add(new HShape(x + nuSize, y + nuSize, Color.YELLOW, nuSize));
-		// midright
-		innerH.add(new HShape(x + (2 * nuSize), y + nuSize, Color.YELLOW, nuSize));
-		// botleft
-		innerH.add(new HShape(x, y + (2 * nuSize), Color.YELLOW, nuSize));
-		// botright
-		innerH.add(new HShape(x + (2 * nuSize), y + (2 * nuSize), Color.YELLOW, nuSize));
-
-	}
-
-	// returns the innerH at the given index
-	protected HShape getInnerH(int index) {
-		return innerH.get(index);
-	}
-
-	// private field required a method to retrieve size.
-	protected int innerHSize() {
-		return innerH.size();
-
-	}
-
-	//creates H shape, filled but not outlined
-	protected void createH(int x, int y, int miniSqrWidth, Graphics g) {
 		
+		
+		
+		if(this.shapeArray[0] != null) {
+			System.out.println("indraw");
+			for(int i = 0; i < this.shapeArray.length;i ++) {
+				HShape f = (HShape)shapeArray[i];
+				g.drawRect(f.getX(), f.getY(), f.getSize(), f.getSize());
+				createH(f.getX(), f.getY(),miniSqrWidth, g);
+				
+//				g.drawRect(x, y, miniSqrWidth, height);
+			}
+		}
+	}
+
+	
+	
+	
+	// creates 7 inner h's occupying sqrs that comprise this H
+	// adds to shapeArray 
+	// color can easily be modified
+	public void addLevel() {
+		
+		if(this.shapeArray[0] == null) {
+	
+		
+		
+		int nuSize = this.getSize() / 3;
+
+		shapeArray[0] = new HShape(this.getX(), this.getY(),this.getColor(), nuSize);
+		shapeArray[1] = new HShape(this.getX() + (2 * nuSize), this.getY(), this.getColor(), nuSize);
+		shapeArray[2] = new HShape(this.getX(), this.getY() + nuSize, this.getColor(), nuSize);
+		shapeArray[3] = new HShape(this.getX() + nuSize, this.getY() + nuSize, this.getColor(), nuSize);
+		shapeArray[4] = new HShape(this.getX() + (2 * nuSize), this.getY() + nuSize,this.getColor(), nuSize);
+		shapeArray[5] = new HShape(this.getX(), this.getY() + (2 * nuSize), this.getColor(), nuSize);
+		shapeArray[6] = new HShape(this.getX() + (2 * nuSize), this.getY() + (2 * nuSize), this.getColor(), nuSize);
+	
+		}
+		else {
+			for(int i = 0; i < this.shapeArray.length; i ++) {
+				
+				this.shapeArray[i].addLevel();
+			}
+		}
+
+
+	}
+
+//	// returns the innerH at the given index
+//	protected HShape getInnerH(int index) {
+//		return innerH.get(index);
+//	}
+//
+//	// private field required a method to retrieve size.
+//	protected int innerHSize() {
+//		return innerH.size();
+//
+//	}
+
+	// creates H shape, filled but not outlined
+	protected void createH(int x, int y, int miniSqrWidth, Graphics g) {
+
 		// //first sqr top left corner
 		g.fillRect(x, y, miniSqrWidth, miniSqrWidth);
 		// //skip middle on top right corner
@@ -89,8 +113,8 @@ public class HShape extends AbstractShape {
 
 	}
 
-	//outlines all the sqrs comprising the H
-	//color easily modified
+	// outlines all the sqrs comprising the H
+	// color easily modified
 	protected void traceSmallSqr(int x, int y, int miniSqrWidth, int width, int height, Graphics g) {
 		g.setColor(Color.BLACK);
 		g.drawRect(x, y, miniSqrWidth, miniSqrWidth);
@@ -102,5 +126,10 @@ public class HShape extends AbstractShape {
 		g.drawRect(x + (2 * miniSqrWidth), y + (2 * miniSqrWidth), miniSqrWidth, miniSqrWidth);
 		g.drawRect(x, y, width, height);
 
+	}
+	
+	@Override
+	public HShape copy() {
+		return new HShape(this.getX(),this.getY(),this.getColor(),this.getSize());
 	}
 }
