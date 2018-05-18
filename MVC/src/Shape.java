@@ -2,6 +2,15 @@ import java.awt.Graphics;
 
 public interface Shape {
 
-  void draw(Graphics g);
+  /**
+   * Draws the shape in the given window
+   *
+   * @param graphics the window to draw in
+   */
+  void draw(Graphics graphics);
+
+  /**
+   * @return A deep copy of the shape
+   */
   Shape copy();
 }

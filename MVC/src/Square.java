@@ -1,27 +1,22 @@
-//import java.awt.Color;
-//import java.awt.Graphics;
-//import java.util.Random;
-//
-//public class Square extends AbstractShape {
-//
-//
-//  public Square(int xLocation, int yLocation, Color color, int containerSize) {
-//    super(xLocation, yLocation, color, containerSize);
-//  }
-//
-//
-//  @Override
-//  public void draw(Graphics g) {
-//    Random rand = new Random();
-//    int x, y, width, height;
-//
-//    x = rand.nextInt(1000);
-//    y = rand.nextInt(800);
-//
-//    width = height = 50;
-//    g.setColor(Color.CYAN);
-//
-//    g.drawRect(x, y, width, height);
-//
-//  }
-//}
+import java.awt.Color;
+import java.awt.Graphics;
+
+public class Square extends AbstractShape implements Shape {
+
+
+  public Square(int xLocation, int yLocation, Color color, int size) {
+    super(xLocation, yLocation, color, size);
+  }
+
+
+  @Override
+  public void draw(Graphics graphics) {
+    graphics.setColor(color);
+    graphics.fillRect(xLocation, yLocation, size, size);
+  }
+
+  @Override
+  public Shape copy() {
+    return new Square(xLocation, yLocation, color, size);
+  }
+}

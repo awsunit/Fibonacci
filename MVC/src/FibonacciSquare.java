@@ -14,7 +14,7 @@ public class FibonacciSquare extends AbstractShape {
 
   }
 
-  public static int fibonacciSum(int n) {
+  private static int fibonacciSum(int n) {
     if (n < 1) {
       return 0;
     }
@@ -55,21 +55,17 @@ public class FibonacciSquare extends AbstractShape {
 
   }
 
-  public int getSequenceIndex() {
-    return sequenceIndex;
-  }
 
-  public void setSequenceIndex(int sequenceIndex) {
+  private void setSequenceIndex(int sequenceIndex) {
     this.sequenceIndex = sequenceIndex;
   }
 
-  @Override
   public void draw(Graphics graphics) {
 
-    graphics.setColor(this.getColor());
+    graphics.setColor(color);
     graphics.drawRect(xLocation, yLocation, size, size);
     int startAngle = quadrant * 90;
-    int arcX = xLocation - size + (quadrant % 3 != 0 ? size : 0);
+    int arcX = xLocation - (quadrant % 3 == 0 ? size : 0);
     int arcY = yLocation - (quadrant > 1 ? size : 0);
     graphics.drawArc(arcX, arcY, 2 * size, 2 * size, startAngle, 90);
 
@@ -79,12 +75,9 @@ public class FibonacciSquare extends AbstractShape {
     return new FibonacciSquare(xLocation, yLocation, color, quadrant, sequenceIndex);
   }
 
-  protected int getQuadrant() {
-    return this.quadrant;
-  }
-
-  protected void setQuadrant(int q) {
-    this.quadrant = q;
+  private void setQuadrant(int quadrant) {
+    this.quadrant = quadrant % 4;
   }
 
 }
+
