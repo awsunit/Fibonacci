@@ -1,8 +1,15 @@
 import java.awt.Graphics;
 
 public interface Shape {
-	void draw(Graphics g);
 	
+
 	Shape copy();
-	 void addLevel();
+
+	boolean addLevel();
+
+	boolean removeLevel();
+
+	boolean contains(int i, int j);
+	
+	void draw(Graphics g);
 }

@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class HShape extends AbstractShape {
 
-//	private HShape[] innerH = new ArrayList<HShape>(7);
+	String[] jar = new String[7];
 
 	public HShape(int x, int y, Color c, int size) {
 		super(x, y, c, size);
@@ -33,83 +33,88 @@ public class HShape extends AbstractShape {
 
 		// trace outline of the smallsqrs
 		traceSmallSqr(x, y, miniSqrWidth, width, height, g);
+
 		
 		
-		
-		if(this.shapeArray[0] != null) {
-			System.out.println("indraw");
-			for(int i = 0; i < this.shapeArray.length;i ++) {
-				HShape f = (HShape)shapeArray[i];
-				g.drawRect(f.getX(), f.getY(), f.getSize(), f.getSize());
-				createH(f.getX(), f.getY(),miniSqrWidth, g);
-				
-//				g.drawRect(x, y, miniSqrWidth, height);
+		if (this.shapeArray[0] != null) {
+			for (Shape s : this.shapeArray) {
+				s.draw(g);
 			}
 		}
+
 	}
 
-	
-	
-	
 	// creates 7 inner h's occupying sqrs that comprise this H
-	// adds to shapeArray 
+	// adds them to shapeArray
 	// color can easily be modified
-	public void addLevel() {
-		
-		if(this.shapeArray[0] == null) {
-	
-		
-		
-		int nuSize = this.getSize() / 3;
+	@Override
+	public boolean addLevel() {
 
-		shapeArray[0] = new HShape(this.getX(), this.getY(),this.getColor(), nuSize);
-		shapeArray[1] = new HShape(this.getX() + (2 * nuSize), this.getY(), this.getColor(), nuSize);
-		shapeArray[2] = new HShape(this.getX(), this.getY() + nuSize, this.getColor(), nuSize);
-		shapeArray[3] = new HShape(this.getX() + nuSize, this.getY() + nuSize, this.getColor(), nuSize);
-		shapeArray[4] = new HShape(this.getX() + (2 * nuSize), this.getY() + nuSize,this.getColor(), nuSize);
-		shapeArray[5] = new HShape(this.getX(), this.getY() + (2 * nuSize), this.getColor(), nuSize);
-		shapeArray[6] = new HShape(this.getX() + (2 * nuSize), this.getY() + (2 * nuSize), this.getColor(), nuSize);
+		
+		
+		if (this.shapeArray[0] == null) {
+
+			int nuSize = this.getSize() / 3;
 	
-		}
-		else {
-			for(int i = 0; i < this.shapeArray.length; i ++) {
+
+			
+			//checking that h's will render, if not returning false
+			if (nuSize > 20) {
+				System.out.println("inside HShapes were null, creating now");
+				shapeArray[0] = new HShape(this.getX(), this.getY(),this.getColor(), nuSize);
+				shapeArray[1] = new HShape(this.getX() + (2 * nuSize), this.getY(), this.getColor(), nuSize);
+				shapeArray[2] = new HShape(this.getX(), this.getY() + nuSize, this.getColor(), nuSize);
+				shapeArray[3] = new HShape(this.getX() + nuSize, this.getY() + nuSize, this.getColor(), nuSize);
+				shapeArray[4] = new HShape(this.getX() + (2 * nuSize), this.getY() + nuSize,this.getColor(), nuSize);
+				shapeArray[5] = new HShape(this.getX(), this.getY() + (2 * nuSize), this.getColor(), nuSize);
+				shapeArray[6] = new HShape(this.getX() + (2 * nuSize), this.getY() + (2 * nuSize), this.getColor(), nuSize);
+			} else {
 				
+				return false;
+			
+			}
+		} else {
+			System.out.println("inside h's were full, making them parents");
+			for (int i = 0; i < this.shapeArray.length; i++) {
 				this.shapeArray[i].addLevel();
 			}
 		}
 
-
+		return true;
 	}
 
-//	// returns the innerH at the given index
-//	protected HShape getInnerH(int index) {
-//		return innerH.get(index);
-//	}
-//
-//	// private field required a method to retrieve size.
-//	protected int innerHSize() {
-//		return innerH.size();
-//
-//	}
+	// use recursive calling...
+	public boolean removeLevel() {
+
+		int i = 0;
+		if (this.shapeArray[0] != null) {
+			for (Shape s : shapeArray) {
+				s.removeLevel();
+			}
+		} else if (this.shapeArray[0] == null) {
+			if (i > 0) {
+			}
+		}
+		return false;
+	}
+
+	// returns the innerH at the given index
+	protected Shape getInnerH(int index) {
+		return this.shapeArray[index];
+	}
 
 	// creates H shape, filled but not outlined
 	protected void createH(int x, int y, int miniSqrWidth, Graphics g) {
 
-		// //first sqr top left corner
-		g.fillRect(x, y, miniSqrWidth, miniSqrWidth);
-		// //skip middle on top right corner
-		g.fillRect(x + (2 * miniSqrWidth), y, miniSqrWidth, miniSqrWidth);
-		//
-		// //middle row left sqr
-		g.fillRect(x, y + miniSqrWidth, miniSqrWidth, miniSqrWidth);
-		// //middle mid sqr
-		g.fillRect(x + miniSqrWidth, y + miniSqrWidth, miniSqrWidth, miniSqrWidth);
-		// //middle right sqr
-		g.fillRect(x + (2 * miniSqrWidth), y + miniSqrWidth, miniSqrWidth, miniSqrWidth);
-		//
-		// //bottom row
-		g.fillRect(x, y + (2 * miniSqrWidth), miniSqrWidth, miniSqrWidth);
-		g.fillRect(x + (2 * miniSqrWidth), y + (2 * miniSqrWidth), miniSqrWidth, miniSqrWidth);
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				if (i == 1 && (j == 0 || j == 2)) {
+					g.setColor(Color.WHITE);
+				}
+				g.fillRect(x + (i * miniSqrWidth), y + (j * miniSqrWidth), miniSqrWidth, miniSqrWidth);
+				g.setColor(this.getColor());
+			}
+		}
 
 	}
 
@@ -117,19 +122,19 @@ public class HShape extends AbstractShape {
 	// color easily modified
 	protected void traceSmallSqr(int x, int y, int miniSqrWidth, int width, int height, Graphics g) {
 		g.setColor(Color.BLACK);
-		g.drawRect(x, y, miniSqrWidth, miniSqrWidth);
-		g.drawRect(x + (2 * miniSqrWidth), y, miniSqrWidth, miniSqrWidth);
-		g.drawRect(x, y + miniSqrWidth, miniSqrWidth, miniSqrWidth);
-		g.drawRect(x + miniSqrWidth, y + miniSqrWidth, miniSqrWidth, miniSqrWidth);
-		g.drawRect(x + (2 * miniSqrWidth), y + miniSqrWidth, miniSqrWidth, miniSqrWidth);
-		g.drawRect(x, y + (2 * miniSqrWidth), miniSqrWidth, miniSqrWidth);
-		g.drawRect(x + (2 * miniSqrWidth), y + (2 * miniSqrWidth), miniSqrWidth, miniSqrWidth);
-		g.drawRect(x, y, width, height);
+		for(int i = 0; i < 3; i ++) {
+			for(int j = 0; j < 3; j ++) {
+				if(!((i == 1 && j == 0) || (i == 1 && j == 2))) {
+				g.drawRect(x + (i * miniSqrWidth), y + (j * miniSqrWidth),miniSqrWidth, miniSqrWidth);
+				}
+			}
+		}
+
 
 	}
-	
+
 	@Override
 	public HShape copy() {
-		return new HShape(this.getX(),this.getY(),this.getColor(),this.getSize());
+		return new HShape(this.getX(), this.getY(), this.getColor(), this.getSize());
 	}
 }

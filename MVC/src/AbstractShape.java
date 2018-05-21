@@ -7,9 +7,11 @@ public abstract class AbstractShape implements Shape {
 	// the sqr that the H resides in
 	private int containerSqrSize;
 	private Color c;
+	// innerH's
 	protected Shape[] shapeArray;
 
 	public AbstractShape(int x, int y, Color c, int containerSqrSize) {
+
 		this.setX(x);
 		this.setY(y);
 		this.setColor(c);
@@ -48,12 +50,41 @@ public abstract class AbstractShape implements Shape {
 		this.y = y;
 	}
 
-//	 void addLevel() {
-//
-//	}
+	public boolean contains(int clickedX, int clickedY) {
+		int xFrom, xTo, yFrom, yTo,rowSize,xNoMansFrom,xNoMansTo,yNoMansTopFrom,yNoMansTopTo,yNoMansBotFrom,yNoMansBotTo ;
+		boolean widthOk, heightOk, noMans1,noMans2;
 
-	// public AbstractShape copy() {
-	//
-	//
-	// }
+		xFrom = this.getX();
+		xTo = this.getSize() + xFrom;
+		yFrom = this.getY();
+		yTo = this.getSize() + yFrom;
+		
+		//middle square sections
+		rowSize = this.getSize()/3;
+		xNoMansFrom = xFrom + rowSize;
+		xNoMansTo = xFrom + rowSize*2;
+		
+		yNoMansTopFrom = yFrom;
+		yNoMansTopTo = yFrom + rowSize;
+		
+		yNoMansBotFrom = yFrom + (2*rowSize);
+		yNoMansBotTo = yTo;
+		
+		noMans1 = (clickedX > xNoMansFrom && clickedX < xNoMansTo)&&(clickedY > yFrom && clickedY < yNoMansTopTo);
+		noMans2 = (clickedX > xNoMansFrom && clickedX < xNoMansTo)&&(clickedY > yNoMansBotFrom && clickedY < yTo);
+		
+		
+
+		//wish java could read things like 0<x<1
+		widthOk = (clickedX >= xFrom) && (clickedX <= xTo);
+		heightOk = (clickedY >= yFrom) && (clickedY <= yTo);
+		
+		if(noMans1 || noMans2) {
+			return false;
+		}
+
+		return (widthOk && heightOk);
+
+	}
+
 }

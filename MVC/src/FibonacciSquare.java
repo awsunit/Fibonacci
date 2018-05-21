@@ -32,34 +32,47 @@ public class FibonacciSquare extends AbstractShape {
 		g.drawArc(arcX, arcY, 2 * size, 2 * size, startAngle, 90);
 
 	}
+//	@Override
+//	public boolean removeLevel() {
+//		return false;
+//	}
 
-	
-	protected FibonacciSquare addLevel() {
-		int x = this.getX();
-		int y = this.getY();
+	@Override
+	public boolean addLevel() {
 
-		int nextSize = FibonacciVal.FibonnaciNum(myPlaceInFibSeq + 1);
-		int prevSize = FibonacciVal.FibonnaciNum(myPlaceInFibSeq - 1);
+		
+		if (this.shapeArray[0] == null) {
+			int x = this.getX();
+			int y = this.getY();
 
-		switch (quadrant) {
+			int nextSize = FibonacciVal.FibonnaciNum(myPlaceInFibSeq + 1);
+			int prevSize = FibonacciVal.FibonnaciNum(myPlaceInFibSeq - 1);
 
-		case 0:
-			x -= nextSize;
-			break;
-		case 1:
-			y += this.getSize();
-			break;
-		case 2:
-			x += this.getSize();
-			y -= prevSize;
-			break;
-		case 3:
-			x -= prevSize;
-			y -= nextSize;
-			break;
+			switch (quadrant) {
+
+			case 0:
+				x -= nextSize;
+				break;
+			case 1:
+				y += this.getSize();
+				break;
+			case 2:
+				x += this.getSize();
+				y -= prevSize;
+				break;
+			case 3:
+				x -= prevSize;
+				y -= nextSize;
+				break;
+			}
+			shapeArray[0] = new FibonacciSquare(x, y, this.getColor(), (quadrant + 1) % 4, myPlaceInFibSeq + 1);
+
+			return true;
+		} else {
+
+			this.shapeArray[0].addLevel();
+			return true;
 		}
-		return new FibonacciSquare(x, y, this.getColor(), (quadrant + 1) % 4, myPlaceInFibSeq + 1);
-
 	}
 
 	protected void setQuadrant(int q) {
@@ -76,6 +89,11 @@ public class FibonacciSquare extends AbstractShape {
 
 	protected void setFibSeq(int i) {
 		myPlaceInFibSeq = i;
+	}
+
+	@Override
+	public FibonacciSquare copy() {
+		return new FibonacciSquare(this.getX(), this.getY(), this.getColor(), this.getQuadrant(), this.myPlaceInFibSeq);
 	}
 
 }
