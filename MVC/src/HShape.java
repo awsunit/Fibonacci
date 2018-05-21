@@ -37,9 +37,11 @@ public class HShape extends AbstractShape {
     }
   }
 
+
+  // TODO: 5/21/18 replace this garbage
   @Override
   public boolean addLevel() {
-    if (size / 3 < 25) {
+    if (size / 3 < 3) {
       return false;
     }
     if (!hasChildren) {
@@ -66,6 +68,32 @@ public class HShape extends AbstractShape {
     }
   }
 
+
+  @Override
+  public Shape topLevel() {
+    return new HShape(xLocation,yLocation,color,size);
+  }
+
+  @Override
+  public boolean removeLevel() {
+    if (!hasChildren){return false;}
+    if (!shapes[0].hasChildren()){
+      int smallSquareSize = size / 3;
+      for (int row = 0; row < 3; row++) {
+        for (int col = 0; col < 3; col++) {
+          shapes[3 * row + col] =
+              new Square(xLocation + (smallSquareSize * col), yLocation + (smallSquareSize * row),
+                  ((col != 1 || row == 1) ? color : Color.WHITE), smallSquareSize);
+        }
+      }
+      hasChildren=false;
+    }
+    for (Shape shape :
+        shapes) {
+      shape.removeLevel();
+    }
+    return true;
+  }
 
   @Override
   public HShape copy() {

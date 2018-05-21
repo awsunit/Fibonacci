@@ -143,7 +143,7 @@ public class MainClass {
     frame.setVisible(true);
 
     model.addShape(new HShape(100,100,Color.GREEN,729));
-    model.addShape(new FibonacciSquare(1400,500,Color.BLACK,0,0));
+    model.addShape(new FibonacciSquare(1150,500,Color.BLACK,0,0));
 
   }
 }

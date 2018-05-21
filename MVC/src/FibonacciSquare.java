@@ -73,8 +73,12 @@ public class FibonacciSquare extends AbstractShape {
     return this;
   }
 
+  @Override
+  public Shape topLevel() {
+    return new FibonacciSquare(xLocation,yLocation,color,quadrant,sequenceIndex);
+  }
 
-  //@Override
+  @Override
   public boolean removeLevel(){
     if (nextSquare==null){
       return false;

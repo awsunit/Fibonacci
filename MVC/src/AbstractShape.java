@@ -19,6 +19,16 @@ public abstract class AbstractShape implements Shape {
 
 
   @Override
+  public Shape topLevel() {
+    return null;
+  }
+
+  @Override
+  public boolean hasChildren() {
+    return hasChildren;
+  }
+
+  @Override
   public int getxlocation() {
     return xLocation;
   }

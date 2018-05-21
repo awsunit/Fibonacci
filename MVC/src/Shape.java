@@ -16,6 +16,9 @@ public interface Shape {
 
   boolean addLevel();
   boolean removeLevel();
+  boolean hasChildren();
+
+  Shape topLevel();
 
   int getXSize();
   int getYSize();

@@ -29,7 +29,7 @@ public class DrawingModel {
   }
 
   public boolean addLevel(int x, int y) {
-    if (x>1000){
+    if (x>850){
       shapes.get(1).addLevel();
     } else {
       Shape shape = shapes.get(0);
@@ -47,9 +47,28 @@ public class DrawingModel {
   }
 
   public boolean removeLevel(int x, int y) {
-    shapes.get(1).removeLevel();
+    if (x>850){
+      shapes.get(1).removeLevel();
+    } else {
+      Shape shape = shapes.get(0);
+      int xSize = shape.getXSize();
+      int ySize = shape.getYSize();
+      int xLocation = shape.getxlocation();
+      int yLocation = shape.getylocation();
+
+      if (x>xLocation&&x<xLocation+xSize&&y>yLocation&&y<yLocation+ySize){
+        shape.removeLevel();
+      }
+    }
     updateAll();
     return false;
+  }
+
+  public void reset(){
+    for (int i = 0; i < shapes.size(); i++) {
+      shapes.set(i,shapes.get(i).topLevel());
+    }
+    updateAll();
   }
 
   /**
