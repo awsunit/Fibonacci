@@ -16,6 +16,12 @@ public class Square extends AbstractShape implements Shape {
   }
 
   @Override
+  public boolean addLevel() {
+    return false;
+  }
+
+
+  @Override
   public Shape copy() {
     return new Square(xLocation, yLocation, color, size);
   }

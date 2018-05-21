@@ -13,4 +13,12 @@ public interface Shape {
    * @return A deep copy of the shape
    */
   Shape copy();
+
+  boolean addLevel();
+  boolean removeLevel();
+
+  int getXSize();
+  int getYSize();
+  int getxlocation();
+  int getylocation();
 }

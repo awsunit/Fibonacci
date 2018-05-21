@@ -5,12 +5,13 @@ public class FibonacciSquare extends AbstractShape {
 
   private int quadrant;
   private int sequenceIndex;
+  private FibonacciSquare nextSquare;
 
   public FibonacciSquare(int xLocation, int yLocation, Color color, int quadrant,
       int sequenceIndex) {
     super(xLocation, yLocation, color, fibonacciSum(sequenceIndex));
-    this.setQuadrant(quadrant % 4);
-    this.setSequenceIndex(sequenceIndex);
+    this.quadrant = quadrant % 4;
+    this.sequenceIndex = sequenceIndex;
 
   }
 
@@ -48,17 +49,11 @@ public class FibonacciSquare extends AbstractShape {
         nextY -= nextSize;
         nextX -= prevSize;
         break;
-
     }
-
     return new FibonacciSquare(nextX, nextY, color, (quadrant + 1) % 4, sequenceIndex + 1);
 
   }
 
-
-  private void setSequenceIndex(int sequenceIndex) {
-    this.sequenceIndex = sequenceIndex;
-  }
 
   public void draw(Graphics graphics) {
 
@@ -68,16 +63,40 @@ public class FibonacciSquare extends AbstractShape {
     int arcX = xLocation - (quadrant % 3 == 0 ? size : 0);
     int arcY = yLocation - (quadrant > 1 ? size : 0);
     graphics.drawArc(arcX, arcY, 2 * size, 2 * size, startAngle, 90);
-
+    if (nextSquare != null) {
+      nextSquare.draw(graphics);
+    }
   }
 
   public FibonacciSquare copy() {
-    return new FibonacciSquare(xLocation, yLocation, color, quadrant, sequenceIndex);
+//    return new FibonacciSquare(xLocation, yLocation, color, quadrant, sequenceIndex);
+    return this;
   }
 
-  private void setQuadrant(int quadrant) {
-    this.quadrant = quadrant % 4;
+
+  //@Override
+  public boolean removeLevel(){
+    if (nextSquare==null){
+      return false;
+    }
+    if (nextSquare.nextSquare==null){
+      nextSquare=null;
+      hasChildren=false;
+      return true;
+    }
+    return nextSquare.removeLevel();
   }
 
+
+  @Override
+  public boolean addLevel() {
+    if (!hasChildren) {
+      nextSquare = nextSquare();
+      hasChildren = true;
+      return true;
+    } else {
+      return nextSquare.addLevel();
+    }
+  }
 }
 

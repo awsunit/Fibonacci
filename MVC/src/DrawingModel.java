@@ -14,10 +14,6 @@ public class DrawingModel {
     updateAll();
   }
 
-  public void addShape(ArrayList<Shape> shapes) {
-    this.shapes.addAll(shapes);
-    updateAll();
-  }
 
   // A viewer should be able to register with the model
   public void addView(View view) {
@@ -30,6 +26,30 @@ public class DrawingModel {
     for (View view : views) {
       view.update(this);
     }
+  }
+
+  public boolean addLevel(int x, int y) {
+    if (x>1000){
+      shapes.get(1).addLevel();
+    } else {
+      Shape shape = shapes.get(0);
+      int xSize = shape.getXSize();
+      int ySize = shape.getYSize();
+      int xLocation = shape.getxlocation();
+      int yLocation = shape.getylocation();
+
+      if (x>xLocation&&x<xLocation+xSize&&y>yLocation&&y<yLocation+ySize){
+        shape.addLevel();
+      }
+    }
+    updateAll();
+    return false;
+  }
+
+  public boolean removeLevel(int x, int y) {
+    shapes.get(1).removeLevel();
+    updateAll();
+    return false;
   }
 
   /**
