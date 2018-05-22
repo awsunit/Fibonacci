@@ -7,6 +7,7 @@ public abstract class AbstractShape implements Shape {
   //the sqr that the H resides in
   protected final int size;
   protected final Color color;
+  protected int level;
   public boolean hasChildren;
 
   public AbstractShape(int xLocation, int yLocation, Color color, int size) {
@@ -57,4 +58,17 @@ public abstract class AbstractShape implements Shape {
   public boolean removeLevel() {
     return false;
   }
+
+  @Override
+  public String toString() {
+	  String s = "I am a " + this.getClass() + "\n" +
+			  "I live at (x,y) = (" + this.getXSize() + "," +
+			  this.getYSize() + ")\n" + "I am " + 
+			  color + " colored" + "\n" 
+			  		+ "I am a level " + this.level;
+	  return s;
+  }
+  
+ 
+ 
 }

@@ -12,6 +12,7 @@ public class FibonacciSquare extends AbstractShape {
     super(xLocation, yLocation, color, fibonacciSum(sequenceIndex));
     this.quadrant = quadrant % 4;
     this.sequenceIndex = sequenceIndex;
+    level = 1;
 
   }
 
@@ -97,10 +98,16 @@ public class FibonacciSquare extends AbstractShape {
     if (!hasChildren) {
       nextSquare = nextSquare();
       hasChildren = true;
+      level ++;
       return true;
     } else {
+    	level ++;
       return nextSquare.addLevel();
     }
+  }
+  
+  public int getFibSq () {
+	  return sequenceIndex;
   }
 }
 

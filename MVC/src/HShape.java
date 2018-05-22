@@ -15,6 +15,7 @@ public class HShape extends AbstractShape {
                 ((col != 1 || row == 1) ? color : Color.WHITE), smallSquareSize);
       }
     }
+    this.level = 1;
   }
 
   private void setShapes(Shape[] shapes) {
@@ -53,7 +54,9 @@ public class HShape extends AbstractShape {
                     size / 3);
           }
         }
+        
       }
+      level ++;
       hasChildren = true;
       return true;
     } else {
@@ -64,6 +67,7 @@ public class HShape extends AbstractShape {
           }
         }
       }
+      level ++;
       return true;
     }
   }
@@ -92,6 +96,7 @@ public class HShape extends AbstractShape {
         shapes) {
       shape.removeLevel();
     }
+   level --;
     return true;
   }
 

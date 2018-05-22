@@ -31,6 +31,7 @@ public class DrawingModel {
   public boolean addLevel(int x, int y) {
     if (x>850){
       shapes.get(1).addLevel();
+      System.out.println(shapes.get(1).toString());
     } else {
       Shape shape = shapes.get(0);
       int xSize = shape.getXSize();
@@ -40,6 +41,7 @@ public class DrawingModel {
 
       if (x>xLocation&&x<xLocation+xSize&&y>yLocation&&y<yLocation+ySize){
         shape.addLevel();
+        System.out.println(shape.toString());
       }
     }
     updateAll();
@@ -58,6 +60,7 @@ public class DrawingModel {
 
       if (x>xLocation&&x<xLocation+xSize&&y>yLocation&&y<yLocation+ySize){
         shape.removeLevel();
+        System.out.println(shape.toString());
       }
     }
     updateAll();
