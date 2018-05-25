@@ -5,14 +5,13 @@ public class FibonacciSquare extends AbstractShape {
 
   private int quadrant;
   private int sequenceIndex;
-  private FibonacciSquare nextSquare;
 
   public FibonacciSquare(int xLocation, int yLocation, Color color, int quadrant,
       int sequenceIndex) {
     super(xLocation, yLocation, color, fibonacciSum(sequenceIndex));
     this.quadrant = quadrant % 4;
     this.sequenceIndex = sequenceIndex;
-    level = 1;
+    this.children = new Shape[1];
 
   }
 
@@ -29,7 +28,7 @@ public class FibonacciSquare extends AbstractShape {
     return curSum;
   }
 
-  public FibonacciSquare nextSquare() {
+  private FibonacciSquare nextSquare() {
     int nextSize = fibonacciSum(sequenceIndex + 1);
     int prevSize = fibonacciSum(sequenceIndex - 1);
     int nextX = xLocation;
@@ -64,50 +63,53 @@ public class FibonacciSquare extends AbstractShape {
     int arcX = xLocation - (quadrant % 3 == 0 ? size : 0);
     int arcY = yLocation - (quadrant > 1 ? size : 0);
     graphics.drawArc(arcX, arcY, 2 * size, 2 * size, startAngle, 90);
-    if (nextSquare != null) {
-      nextSquare.draw(graphics);
+    if (hasChildren) {
+      children[0].draw(graphics);
     }
   }
 
   public FibonacciSquare copy() {
-//    return new FibonacciSquare(xLocation, yLocation, color, quadrant, sequenceIndex);
-    return this;
+    FibonacciSquare copy = new FibonacciSquare(xLocation, yLocation, color, quadrant,
+        sequenceIndex);
+    if (hasChildren) {
+      copy.hasChildren = true;
+      copy.children[0] = children[0].copy();
+    }
+    return copy;
   }
 
   @Override
   public Shape topLevel() {
-    return new FibonacciSquare(xLocation,yLocation,color,quadrant,sequenceIndex);
-  }
-
-  @Override
-  public boolean removeLevel(){
-    if (nextSquare==null){
-      return false;
-    }
-    if (nextSquare.nextSquare==null){
-      nextSquare=null;
-      hasChildren=false;
-      return true;
-    }
-    return nextSquare.removeLevel();
+    return new FibonacciSquare(xLocation, yLocation, color, quadrant, sequenceIndex);
   }
 
 
-  @Override
-  public boolean addLevel() {
+  public int getLevel() {
     if (!hasChildren) {
-      nextSquare = nextSquare();
-      hasChildren = true;
-      level ++;
-      return true;
-    } else {
-    	level ++;
-      return nextSquare.addLevel();
+      return 0;
     }
+    return children[0].getLevel() + 1;
   }
-  
-  public int getFibSq () {
-	  return sequenceIndex;
+
+  @Override
+  public String toString() {
+    return "Fibonacci Square:"
+        + "\nlevel " + getLevel()
+        + "\nColor " + color
+        + "\nX co-ord " + xLocation
+        + "\nY co-ord " + yLocation;
   }
+
+  protected void createChildren() {
+    children[0] = nextSquare();
+    hasChildren = true;
+  }
+
+  @Override
+  public boolean canAddLevel() {
+    return !(nextSquare().getxLocation() < 0 || nextSquare().getyLocation() < 0);
+
+  }
+
 }
 

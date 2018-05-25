@@ -4,11 +4,10 @@ public abstract class AbstractShape implements Shape {
 
   protected final int xLocation;
   protected final int yLocation;
-  //the sqr that the H resides in
   protected final int size;
   protected final Color color;
-  protected int level;
-  public boolean hasChildren;
+  protected boolean hasChildren;
+  protected Shape[] children = new Shape[0];
 
   public AbstractShape(int xLocation, int yLocation, Color color, int size) {
     this.xLocation = xLocation;
@@ -30,12 +29,12 @@ public abstract class AbstractShape implements Shape {
   }
 
   @Override
-  public int getxlocation() {
+  public int getxLocation() {
     return xLocation;
   }
 
   @Override
-  public int getylocation() {
+  public int getyLocation() {
     return yLocation;
   }
 
@@ -51,24 +50,43 @@ public abstract class AbstractShape implements Shape {
 
   @Override
   public boolean addLevel() {
+    if (canAddLevel()) {
+      if (hasChildren()) {
+        for (Shape child :
+            children) {
+          child.addLevel();
+        }
+        return true;
+      }
+      createChildren();
+      hasChildren = true;
+      return true;
+    }
     return false;
   }
 
   @Override
   public boolean removeLevel() {
-    return false;
+    if (!hasChildren()) {
+      return false;
+    }
+    if (children[0].hasChildren()) {
+      for (Shape child :
+          children) {
+        child.removeLevel();
+      }
+      return true;
+    }
+    children = new Shape[children.length];
+    hasChildren = false;
+    return true;
+  }
+
+  protected void createChildren() {
   }
 
   @Override
-  public String toString() {
-	  String s = "I am a " + this.getClass() + "\n" +
-			  "I live at (x,y) = (" + this.getXSize() + "," +
-			  this.getYSize() + ")\n" + "I am " + 
-			  color + " colored" + "\n" 
-			  		+ "I am a level " + this.level;
-	  return s;
+  public boolean canAddLevel() {
+    return false;
   }
-  
- 
- 
 }

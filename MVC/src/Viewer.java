@@ -13,19 +13,18 @@ public class Viewer extends JPanel implements View {
 
   @Override
   public void update(DrawingModel model) {
-    System.out.println("Update called");
     this.model = model;
     repaint(); // will eventually call paintComponent
   }
 
   @Override
-  protected void paintComponent(Graphics g) {
-    super.paintComponent(g);
+  protected void paintComponent(Graphics graphics) {
+    super.paintComponent(graphics);
 
     // display of the shapes
     if (model != null) {
-      for (Shape s : model.getShapes()) {
-        s.draw(g);
+      for (Shape shape : model.getShapes()) {
+        shape.draw(graphics);
       }
     }
   }

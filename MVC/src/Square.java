@@ -20,6 +20,15 @@ public class Square extends AbstractShape implements Shape {
     return false;
   }
 
+  @Override
+  public int getLevel() {
+    return 0;
+  }
+
+  @Override
+  public String toString() {
+    return "Square";
+  }
 
   @Override
   public Shape copy() {

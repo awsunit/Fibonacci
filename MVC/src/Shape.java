@@ -2,30 +2,35 @@ import java.awt.Graphics;
 
 public interface Shape {
 
-	/**
-	 * Draws the shape in the given window
-	 *
-	 * @param graphics
-	 *            the window to draw in
-	 */
-	void draw(Graphics graphics);
+  /**
+   * Draws the shape in the given window
+   *
+   * @param graphics the window to draw in
+   */
+  void draw(Graphics graphics);
 
-	/**
-	 * @return A deep copy of the shape
-	 */
-	Shape copy();
+  /**
+   * @return A deep copy of the shape
+   */
+  Shape copy();
 
-	boolean contains(int clickedX, int clickedY);
-	boolean addLevel();
-	boolean removeLevel();
-	boolean hasChildren();
+  boolean addLevel();
 
-	Shape topLevel();
+  boolean removeLevel();
 
-	int getXSize();
-	int getYSize();
-	int getxlocation();
-	int getylocation();
+  boolean hasChildren();
 
-	
+  boolean canAddLevel();
+
+  Shape topLevel();
+
+  int getXSize();
+
+  int getYSize();
+
+  int getxLocation();
+
+  int getyLocation();
+
+  int getLevel();
 }

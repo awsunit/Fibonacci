@@ -129,6 +129,9 @@ public class MainClass {
     DrawingModel model = new DrawingModel();
     model.addView(viewer);
 
+    TextViewer textViewer = new TextViewer();
+    model.addView(textViewer);
+
     // Create a controller
     Controller controller = new Controller(model);
 
@@ -142,8 +145,8 @@ public class MainClass {
     // Show it (execute this line last)
     frame.setVisible(true);
 
-    model.addShape(new HShape(100,100,Color.GREEN,729));
-    model.addShape(new FibonacciSquare(1150,500,Color.BLACK,0,0));
+    model.addShape(new HShape(100, 100, Color.GREEN, 729));
+    model.addShape(new FibonacciSquare(1150, 500, Color.BLACK, 0, 0));
 
 //    for(Shape s: model.getShapes()) {
 //         System.out.println(s.toString());

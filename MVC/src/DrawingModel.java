@@ -14,7 +14,6 @@ public class DrawingModel {
     updateAll();
   }
 
-
   // A viewer should be able to register with the model
   public void addView(View view) {
     views.add(view);
@@ -29,47 +28,46 @@ public class DrawingModel {
   }
 
   public boolean addLevel(int x, int y) {
-    if (x>850){
-      shapes.get(1).addLevel();
-      System.out.println(shapes.get(1).toString());
+    boolean success = false;
+    if (x > 850) {
+      success = shapes.get(1).addLevel();
     } else {
       Shape shape = shapes.get(0);
       int xSize = shape.getXSize();
       int ySize = shape.getYSize();
-      int xLocation = shape.getxlocation();
-      int yLocation = shape.getylocation();
+      int xLocation = shape.getxLocation();
+      int yLocation = shape.getyLocation();
 
-      if (x>xLocation&&x<xLocation+xSize&&y>yLocation&&y<yLocation+ySize){
-        shape.addLevel();
-        System.out.println(shape.toString());
+      if (x > xLocation && x < xLocation + xSize && y > yLocation && y < yLocation + ySize) {
+        success = shape.addLevel();
       }
     }
     updateAll();
-    return false;
+    return success;
   }
 
   public boolean removeLevel(int x, int y) {
-    if (x>850){
-      shapes.get(1).removeLevel();
+    boolean success = false;
+    if (x > 850) {
+      success = shapes.get(1).removeLevel();
     } else {
       Shape shape = shapes.get(0);
       int xSize = shape.getXSize();
       int ySize = shape.getYSize();
-      int xLocation = shape.getxlocation();
-      int yLocation = shape.getylocation();
+      int xLocation = shape.getxLocation();
+      int yLocation = shape.getyLocation();
 
-      if (x>xLocation&&x<xLocation+xSize&&y>yLocation&&y<yLocation+ySize){
-        shape.removeLevel();
-        System.out.println(shape.toString());
+      if (x > xLocation && x < xLocation + xSize && y > yLocation && y < yLocation + ySize) {
+        success = shape.removeLevel();
       }
     }
     updateAll();
-    return false;
+    return success;
   }
 
-  public void reset(){
+  public void reset() {
     for (int i = 0; i < shapes.size(); i++) {
-      shapes.set(i,shapes.get(i).topLevel());
+      shapes.set(i, shapes.get(i).topLevel());
     }
     updateAll();
   }
@@ -86,13 +84,4 @@ public class DrawingModel {
     }
     return copyOfShapes;
   }
-
-
 }
-
-
-
-
-
-
-
