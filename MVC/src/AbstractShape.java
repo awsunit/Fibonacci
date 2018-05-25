@@ -82,8 +82,7 @@ public abstract class AbstractShape implements Shape {
     return true;
   }
 
-  protected void createChildren() {
-  }
+  protected abstract void createChildren();
 
   @Override
   public boolean canAddLevel() {

@@ -107,6 +107,9 @@ public class FibonacciSquare extends AbstractShape {
 
   @Override
   public boolean canAddLevel() {
+    if (hasChildren){
+      return children[0].canAddLevel();
+    }
     return !(nextSquare().getxLocation() < 0 || nextSquare().getyLocation() < 0);
 
   }

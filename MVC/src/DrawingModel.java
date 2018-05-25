@@ -32,17 +32,11 @@ public class DrawingModel {
     if (x > 850) {
       success = shapes.get(1).addLevel();
     } else {
-      Shape shape = shapes.get(0);
-      int xSize = shape.getXSize();
-      int ySize = shape.getYSize();
-      int xLocation = shape.getxLocation();
-      int yLocation = shape.getyLocation();
-
-      if (x > xLocation && x < xLocation + xSize && y > yLocation && y < yLocation + ySize) {
-        success = shape.addLevel();
-      }
+      success = shapes.get(0).addLevel();
     }
-    updateAll();
+    if (success) {
+      updateAll();
+    }
     return success;
   }
 
@@ -51,17 +45,11 @@ public class DrawingModel {
     if (x > 850) {
       success = shapes.get(1).removeLevel();
     } else {
-      Shape shape = shapes.get(0);
-      int xSize = shape.getXSize();
-      int ySize = shape.getYSize();
-      int xLocation = shape.getxLocation();
-      int yLocation = shape.getyLocation();
-
-      if (x > xLocation && x < xLocation + xSize && y > yLocation && y < yLocation + ySize) {
-        success = shape.removeLevel();
+      success = shapes.get(0).removeLevel();
       }
+    if (success) {
+      updateAll();
     }
-    updateAll();
     return success;
   }
 
