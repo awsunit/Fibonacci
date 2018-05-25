@@ -59,7 +59,6 @@ public abstract class AbstractShape implements Shape {
         return true;
       }
       createChildren();
-      hasChildren = true;
       return true;
     }
     return false;

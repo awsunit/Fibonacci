@@ -85,17 +85,6 @@ import javax.swing.SwingUtilities;
 public class MainClass {
 
   public static void main(String[] args) {
-    // instantiate an anonymous class that implements
-    // Runnable
-    // new Runnable() { // override of run }
-    /*
-     * SwingUtilities.invokeLater(new Runnable() {
-     *
-     * @Override public void run() { createGUI(); } });
-     */
-
-    // Shorter version of the same code
-    // using lambda notation
     SwingUtilities.invokeLater(() -> createGUI());
   }
 
@@ -148,9 +137,7 @@ public class MainClass {
     model.addShape(new HShape(100, 100, Color.GREEN, 729));
     model.addShape(new FibonacciSquare(1150, 500, Color.BLACK, 0, 0));
 
-//    for(Shape s: model.getShapes()) {
-//         System.out.println(s.toString());
-//    }
+
   }
 }
 
